@@ -2,3 +2,7 @@
 Temp
 Logs
 Library
+obj
+.vs
+*.csproj
+Xlab_Education_Project.sln
