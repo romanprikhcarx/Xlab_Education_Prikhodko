@@ -21,7 +21,7 @@ namespace Golf
 
         private GameObject GetRandomPrefab()
         {
-            if (prefabs.Length == 8)
+            if (prefabs.Length == 0)
             {
                 return null;
             }

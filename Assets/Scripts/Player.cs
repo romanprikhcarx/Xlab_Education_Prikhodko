@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 namespace Golf
@@ -24,6 +23,8 @@ namespace Golf
         {
             m_lastPosition = helper.position;
 
+            //m_isDown = Input.GetMouseButton(0);
+
             Quaternion rot = stick.localRotation;
 
             Quaternion toRot = Quaternion.Euler(0, 0, m_isDown ? range : -range);
@@ -45,7 +46,7 @@ namespace Golf
                 var dir = (helper.position - m_lastPosition).normalized;
                 body.AddForce(dir * power, ForceMode.Impulse);
 
-                if (collider.TryGetComponent(out Stone stone) && stone.isAffect)
+                if (collider.TryGetComponent(out Stone stone) && !stone.isAffect)
                 {
                     stone.isAffect = true;
                     GameEvents.StickHit();
@@ -53,7 +54,7 @@ namespace Golf
             }
 
 
-            Debug.Log(collider, this);
+           // Debug.Log(collider, this);
         }
 
     }

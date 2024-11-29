@@ -11,16 +11,16 @@ namespace Golf
         public float delayMax = 2f;
         public float delayMin = 0.5f;
         public float delayStep = 0.1f;
-        public float m_delay = 0.5f;
+        private float m_delay = 0.5f;
 
-        private float m_lastSpawnedTime;
+        private float m_lastSpawnedTime = 0;
 
         public int score = 0;
-        public int highScore = 0;
+        public int hightScore = 0;
 
         private List<GameObject> m_stones = new List<GameObject>(16);
 
-        private void Start()
+        public void Start()
         {
             m_lastSpawnedTime = Time.time;
             RefreshDelay();
@@ -29,8 +29,8 @@ namespace Golf
         private void OnStickHit()
         {
             score++;
-            highScore = Mathf.Max(highScore, score);
-            Debug.Log($"score: {score} - highScore: {highScore}");
+            hightScore = Mathf.Max(hightScore, score);
+            Debug.Log($"score: {score} - hightScore: {hightScore}");
 
         }
 
@@ -38,18 +38,20 @@ namespace Golf
         {
             GameEvents.onStickHit += OnStickHit;
             score = 0;
+
         }
 
         private void OnDisable()
         {
             GameEvents.onStickHit -= OnStickHit;
+
         }
 
-        private void GameOver()
-        {
-            Debug.Log("Game Over!");
-            enabled = false;
-        }
+        //private void GameOver()
+        //{
+        // Debug.Log("Game Over!");
+        //enabled = false;
+        //}
 
         public void ClearStones()
         {
@@ -76,6 +78,11 @@ namespace Golf
 
                 RefreshDelay();
             }
+        }
+        IEnumerator WaitEvent(System.Action callback)
+        {
+            yield return new WaitForSeconds(delayStep);
+            callback?.Invoke();
         }
     }
 }

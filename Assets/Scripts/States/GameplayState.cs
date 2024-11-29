@@ -21,6 +21,7 @@ namespace Golf
 
             GameEvents.onCollisionStone += OnGameOver;
             GameEvents.onStickHit += OnStickHit;
+            OnStickHit();
         }
 
         private void OnStickHit()

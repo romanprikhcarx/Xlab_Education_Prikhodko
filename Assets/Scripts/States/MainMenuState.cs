@@ -14,13 +14,13 @@ namespace Golf
 
         public void PlayGame()
         { 
-        Exit();
-        gamePlayState.Enter();
+            Exit();
+            gamePlayState.Enter();
         }
         protected override void OnEnable()
         {
             base.OnEnable();
-            scoreText.text = $"HScore : {levelController.highScore}";
+            scoreText.text = $"HScore : {levelController.hightScore}";
         }
     }
 }
